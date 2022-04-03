@@ -1,9 +1,8 @@
-import logostore from "../images/logostore-color.png";
 const Header = () =>{
     return(
         <div>
             <div>
-                <img src={logostore} alt="logo" />
+                <img src="" alt="logo" />
             </div>
             <div>
                 <input type="text" placeholder="ស្វែងរក..." />
