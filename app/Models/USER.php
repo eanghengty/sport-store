@@ -10,4 +10,5 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class USER extends Authenticatable
 {
     protected $table= 'users';
+    
 }

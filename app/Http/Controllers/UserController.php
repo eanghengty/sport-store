@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\USER;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Session\Store;
+use App\Http\Controllers;
 use Hash;
 use Auth;
 class UserController extends Controller
@@ -19,7 +22,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required',
             'password'=>'required',
-            'email'=>'required'
+            'email'=>'required|unique:users,email'
 
         ]);
 
@@ -27,14 +30,24 @@ class UserController extends Controller
         $user->name=$request->name;
         $user->password=Hash::make($request->password);
         $user->email=$request->email;
-        $save = $user->save();
+        // $user->role='admin';
+        
+        // if(DB::table('users')->where('email',$user['email'])){
 
+        // return redirect('/login')->with('error','email and name already in use by other user.');
+        
+        // }else{
+        $save = $user->save();
+        $name = DB::table('users')->where('email',$user['email'])->value('name');
+        
+        
         if($save){
-            return view('Homepage');
+            return redirect()->intended('/login');
         }
         else{
-            return view('signup');
+            return view('login');
         }
+    // }
     }
  
     public function loginstore(Request $request){
@@ -45,14 +58,39 @@ class UserController extends Controller
         ]);
 
         $credentials=$request->only('email','password');
+        $name = DB::table('users')->where('email',$credentials['email'])->value('name');
+        $data=$request->input();
+        
         if(Auth::attempt($credentials)){
-            return redirect()->intended('/');
+            
+            $request->session()->put('email', $data['email'],$name);
+            $request->session()->put('name',$name);
+            // dd($request);
+            if($role = DB::table('users')->where('email',$data['email'])->value('role') === 'admin'){
+                
+                return redirect('admin');
+            }
+            else{
+                return redirect()->intended('/');
+            }
+            
+            
+            
         }
 
         return redirect('login')->with('error','invalid input!');
     }
     public function logout(){
+
+        if(session()->has('email') && session()->has('name')){
+            session()->pull('email');
+            session()->pull('name');
+            // dd(session());
+        }
         Auth::logout();
-        return redirect('login');
+            return redirect('login');
+        
+        
+        
     }
 }

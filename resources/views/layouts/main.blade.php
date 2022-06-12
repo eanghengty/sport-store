@@ -17,11 +17,25 @@
                 </div>
             </div>
             <div class='div-3'>
-                <i class="fa fa-user icon" aria-hidden="true"></i>
+                <div class="dropdownprofile">
+                <span><i class="fa fa-user icon " aria-hidden="true"></i></span>
+                @auth()
+            <div class='dropdownprofile-content'>
+                {{session('name')}}
+                <form method="post" action="{{route('logout')}}">
+                    @csrf
+                    <button type="submit">logout</button>
+                </form>
+            </div>
+            @endauth
+</div>
             </div>
             <div class='div-4'>
-                <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
+                <i class="fa fa-shopping-cart icon" aria-hidden="true">
+                    <a href="/addToCart">s</a>
+                </i>
             </div>
+           
             
              
         </div>
@@ -36,7 +50,7 @@
                 {{-- {/* logo and description */} --}}
             <div class='footer-div-4'>
                 <div class='footer-div-5'>
-                    <img src={{asset('images/logo.png')}} alt="logo" />
+                    <img src="{{asset('images/logo.png')}}" alt="logo" />
                 </div>
                 {{-- {/* footer-div-5 */} --}}
                 <div class='footer-div-6'>
@@ -93,6 +107,25 @@
             {{-- {/* footer-div-2 */} --}}
         </div>
 
-        <script src="{{asset('js/switch.js')}}"></script>
+        <script>
+            var Logform = document.getElementById("Logform");
+            var Regform = document.getElementById("Regform");
+            var line = document.getElementById("line");
+    
+            function reg(){
+                Regform.style.transform = "translateX(0px)";
+                Logform.style.transform = "translateX(0px)";
+                // line.style.transform ="translateX(120px)";
+                // line.style.backgroundColor = "#ff6347";
+            }
+
+            function log(){
+                Regform.style.transform = "translateX(360px)";
+                Logform.style.transform = "translateX(360px)";
+                // line.style.transform ="translateX(-10px)";
+                // line.style.backgroundColor = "#00B1FF";
+            }
+        </script>
+
     </body>
 </html>

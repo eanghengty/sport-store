@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div>
-    <Header/>
+  
     <div class="allitempage2">
         <div class="allitempage3">
         <div class="allitempage4">

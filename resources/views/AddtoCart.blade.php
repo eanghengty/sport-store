@@ -13,7 +13,7 @@
                 <div class="cartitem1">
                     <div class="cartitem2">
                     <div class="cartitem3">
-                        <img src={{asset('images/Products/visakhafc.jpg')}} alt="img" />
+                        <img src="{{asset('images/Products/visakhafc.jpg')}}" alt="img" />
                     </div>
                     <div class="cartitem4">
                         <p>អាវក្នុងក្លឹបគីរីវង្សសែនជ័យ</p>

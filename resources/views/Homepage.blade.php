@@ -19,7 +19,7 @@ const Homepage = ()=>{
 @extends('layouts.main')
 @section('content')
         <div>
-         
+        
             <div class="customer-category__div-1">
                 <div class="customer-category__div-2 customer-category-1-p">
                     <a href="#">
@@ -34,6 +34,7 @@ const Homepage = ()=>{
                 <div class="customer-category__div-4 customer-category-1-p">
                     <a href="#">
                     <p>ក្មេង</p>
+                    
                     </a>
                 </div>
                 <div class="customer-category__div-5 customer-category-1-p">
