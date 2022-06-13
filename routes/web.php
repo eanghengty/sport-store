@@ -18,7 +18,7 @@ Route::get('/addtocart', function () {
 });
 Route::get('/signup',[App\Http\Controllers\UserController::class, 'signupindex']);
 Route::post('/signup',[App\Http\Controllers\UserController::class, 'signupstore'])->name('signupstore');
-Route::get('/login',[App\Http\Controllers\UserController::class, 'loginindex']);
+Route::get('/login',[App\Http\Controllers\UserController::class, 'loginindex'])->name('login');
 Route::post('/login',[App\Http\Controllers\UserController::class, 'loginstore'])->name('loginstore');
 Route::post('/',[App\Http\Controllers\UserController::class, 'logout'])->name('logout');
 Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index'])->name('admin');
@@ -29,6 +29,10 @@ Route::get('/allproduct',[App\Http\Controllers\AdminController::class, 'allprodu
 Route::get('/addclub',[App\Http\Controllers\AdminController::class, 'addclubview'])->name('addclubview');
 Route::post('/addclub',[App\Http\Controllers\AdminController::class, 'addclubstore'])->name('addclubstore');
 Route::get('/allclub',[App\Http\Controllers\AdminController::class, 'allclub'])->name('allclub');
+
+Route::get('/addcategory',[App\Http\Controllers\AdminController::class, 'addcategoryview'])->name('addcategoryview');
+Route::post('/addcategory',[App\Http\Controllers\AdminController::class, 'addcategorystore'])->name('addcategorystore');
+Route::get('/allcategory',[App\Http\Controllers\AdminController::class, 'allcategory'])->name('allcategory');
 
 Route::get('/product',[App\Http\Controllers\ProductController::class, 'index'])->name('allitempage');
 

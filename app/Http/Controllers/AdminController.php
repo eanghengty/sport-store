@@ -10,6 +10,7 @@ use Illuminate\Session\Store;
 use App\Http\Controllers;
 use App\Models\PRODUCT;
 use App\Models\CLUB;
+use App\Models\CATEGORY;
 use Hash;
 use Auth;
 class AdminController extends Controller
@@ -167,24 +168,20 @@ class AdminController extends Controller
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
             $request->validate([
                  
-                'image'=>'required|mimes:jpg,png,jpeg|max:5048',
-                'kh_name'=>'required',
-                'en_name'=>'required',
+                
+                'name'=>'required',
+              
                
             ]);
             
             // $test=$request->file('image')->guessExtension();
             // dd($test);
-            $newImageName=time().'-'.$request->name.'.'.$request->image->extension();
-
-            
-             $request->image->move(public_path('images/clubs'),$newImageName);
+           
               
             $category = CATEGORY::create([
                 'id'=>$request->input('id'),
-                'en_name'=>$request->input('en_name'),
-                'kh_name'=>$request->input('kh_name'),
-                 'image'=>$newImageName,
+                'name'=>$request->input('name'),
+                
                
             ]);
           
@@ -197,7 +194,7 @@ class AdminController extends Controller
             $all = CATEGORY::all();
           
 
-            return view('admin.allCategory',['club'=>$all]);
+            return view('admin.allCategory',['category`'=>$all]);
         }
         
     }
@@ -205,13 +202,13 @@ class AdminController extends Controller
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
             $category=CATEGORY::all();
            
-            return view('admin.allCategory',['club'=>$club]);
+            return view('admin.allCategory',['category'=>$category]);
         }
         else{
             return redirect()->intended('/');
         }
     }
-    public function addcateogoryview(Request $request){
+    public function addcategoryview(Request $request){
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
            
             

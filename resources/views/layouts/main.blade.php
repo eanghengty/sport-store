@@ -28,6 +28,12 @@
                 </form>
             </div>
             @endauth
+            @guest()
+            <div class='dropdownprofile-content'>
+                
+                <a href="{{route('login')}}">Login</a>
+            </div>
+            @endguest
 </div>
             </div>
             <div class='div-4'>

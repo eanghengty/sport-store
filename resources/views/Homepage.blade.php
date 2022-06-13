@@ -1,20 +1,4 @@
-{{-- import Brand from "../includes/Brand";
-import Footer from "../includes/Footer";
-import Header from "../includes/Header";
-import League from "../includes/League";
-import Newitem from "../includes/Newitem";
-import Paymentservice from "../includes/Paymentservice";
-import Popularitem from "../includes/Popularitem";
-import Promotion from "../includes/Promotion";
-import Service from "../includes/Service";
-import './../styles/customer_category.css'
-import banner from './../images/Banner/bkcover.jpg'
-import './../styles/popularitem.css'
-import './../styles/sharetitle.css'
-import './../styles/bodysection.css'
-import banner2 from './../images/Banner/Banner.png'
-const Homepage = ()=>{
-    return( --}}
+
 
 @extends('layouts.main')
 @section('content')
