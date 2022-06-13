@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th scope="col">id</th>
+      <th scope="col">Image</th>
       <th scope="col">client Name</th>
       <th scope="col">client email</th>
       <th scope="col">client role</th>
@@ -13,26 +14,22 @@
     </tr>
   </thead>
   <tbody>
+    
+    @foreach($product as $p)
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
+      
+      <th scope="row">{{$p->id}}</th>
+      
+      <td><img src="{{asset('images/'.$p->image)}}" style="width:100px; height:100px;"/></td>
+      <td>{{$p->product_name}}</td>
+      <td>{{$p->product_quantity}}</td>
+      <td>{{$p->size}}</td>
+      <td>{{$p->price}}</td>
       <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    @endforeach
+    
+  
   </tbody>
 </table>
 </div>
