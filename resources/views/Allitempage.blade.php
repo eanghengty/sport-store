@@ -83,6 +83,6 @@
               </nav>
         </div>
     </div>
-    <Footer/>
+    
 </div>
 @endsection

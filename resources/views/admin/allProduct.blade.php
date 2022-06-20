@@ -25,7 +25,7 @@
       <td>{{$p->product_quantity}}</td>
       <td>{{$p->size}}</td>
       <td>{{$p->price}}</td>
-      <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+      <td><a href="{{route('editproduct')}}">Edit</a> | <a href="#">Delete</a></td>
     </tr>
     @endforeach
     

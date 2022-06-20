@@ -35,6 +35,7 @@ Route::post('/addcategory',[App\Http\Controllers\AdminController::class, 'addcat
 Route::get('/allcategory',[App\Http\Controllers\AdminController::class, 'allcategory'])->name('allcategory');
 
 Route::get('/product',[App\Http\Controllers\ProductController::class, 'index'])->name('allitempage');
+Route::get('/product/{$id}/edit',[App\Http\Controllers\AdminController::class, 'editproduct'])->name('editproduct');
 
 Route::get('/',function(){
     return view('Homepage');

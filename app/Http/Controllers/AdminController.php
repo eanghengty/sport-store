@@ -25,6 +25,15 @@ class AdminController extends Controller
             return redirect()->intended('/');
         }
     }
+
+    public function editproduct($id){
+        if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
+           
+            $product = PRODUCT::findOrFail($id);
+            return view('admin.editproduct',compact('product'));
+            
+        }
+    }
     public function addproductview(Request $request){
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
            
@@ -36,19 +45,19 @@ class AdminController extends Controller
         }
     }
     public function addproductstore(Request $request){
+        $request->validate([
+            'image'=>'required|mimes:jpg,png,jpeg|max:5048',
+            'name'=>'required',
+            'price'=>'required',
+            'size'=>'required',
+            'color'=>'required',
+            'type'=>'required',
+            'description'=>'required',
+            'quantity'=>'required',
+            'price'=>'required'
+        ]);
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
-            $request->validate([
-                    
-                'image'=>'required|mimes:jpg,png,jpeg|max:5048',
-                'name'=>'required',
-                'price'=>'required',
-                'size'=>'required',
-                'color'=>'required',
-                'type'=>'required',
-                'description'=>'required',
-                'quantity'=>'required',
-                'price'
-            ]);
+            
             
             // $test=$request->file('image')->guessExtension();
             // dd($test);
@@ -104,14 +113,15 @@ class AdminController extends Controller
 
 
     public function addclubstore(Request $request){
-        if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
-            $request->validate([
+        $request->validate([
                  
-                'image'=>'required|mimes:jpg,png,jpeg|max:5048',
-                'kh_name'=>'required',
-                'en_name'=>'required',
-               
-            ]);
+            'image'=>'required|mimes:jpg,png,jpeg|max:5048',
+            'kh_name'=>'required',
+            'en_name'=>'required',
+           
+        ]);
+        if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
+           
             
             // $test=$request->file('image')->guessExtension();
             // dd($test);
@@ -165,14 +175,15 @@ class AdminController extends Controller
 
 
     public function addcategorystore(Request $request){
-        if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
-            $request->validate([
+        $request->validate([
                  
                 
-                'name'=>'required',
-              
-               
-            ]);
+            'name'=>'required',
+          
+           
+        ]);
+        if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
+            
             
             // $test=$request->file('image')->guessExtension();
             // dd($test);
@@ -194,7 +205,7 @@ class AdminController extends Controller
             $all = CATEGORY::all();
           
 
-            return view('admin.allCategory',['category`'=>$all]);
+            return view('admin.allCategory',['category'=>$all]);
         }
         
     }
