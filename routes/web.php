@@ -24,7 +24,11 @@ Route::post('/',[App\Http\Controllers\UserController::class, 'logout'])->name('l
 Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 Route::get('/addproduct',[App\Http\Controllers\AdminController::class, 'addproductview'])->name('addproductview');
 Route::post('/addproduct',[App\Http\Controllers\AdminController::class, 'addproductstore'])->name('addproductstore');
+Route::get('/allproduct/{id?}/edit',[App\Http\Controllers\AdminController::class, 'editproduct'])->name('editproduct');
+Route::post('/allproduct/{id?}/edit',[App\Http\Controllers\AdminController::class, 'updateproduct'])->name('updateproduct');
 Route::get('/allproduct',[App\Http\Controllers\AdminController::class, 'allproduct'])->name('allproduct');
+Route::get('/product/{id?}',[App\Http\Controllers\ProductController::class, 'showproduct'])->name('showproduct');
+
 
 Route::get('/addclub',[App\Http\Controllers\AdminController::class, 'addclubview'])->name('addclubview');
 Route::post('/addclub',[App\Http\Controllers\AdminController::class, 'addclubstore'])->name('addclubstore');
@@ -35,11 +39,9 @@ Route::post('/addcategory',[App\Http\Controllers\AdminController::class, 'addcat
 Route::get('/allcategory',[App\Http\Controllers\AdminController::class, 'allcategory'])->name('allcategory');
 
 Route::get('/product',[App\Http\Controllers\ProductController::class, 'index'])->name('allitempage');
-Route::get('/product/{$id}/edit',[App\Http\Controllers\AdminController::class, 'editproduct'])->name('editproduct');
+// Route::get('/product/{$id}/edit',[App\Http\Controllers\AdminController::class, 'editproduct'])->name('editproduct');
 
-Route::get('/',function(){
-    return view('Homepage');
-})->name('homepage');
+Route::get('/',[App\Http\Controllers\ProductController::class, 'item'])->name('homepage');
 Route::get('/allitem',function(){
     return view('page');
 });

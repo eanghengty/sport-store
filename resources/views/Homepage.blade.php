@@ -105,7 +105,7 @@
 
             
         <div class="popular-item__div-3">
-            @for($i=0 ; $i<8 ;$i++)
+            {{-- @for($i=0 ; $i<8 ;$i++)
             <div class='item-div-1'>
                 <a href="#">
                 <div class='item-div-2'>
@@ -127,7 +127,35 @@
                 </a>
             </div>
 
-            @endfor
+            @endfor --}}
+
+            @if($items->isEmpty())
+            <p>no item </p>
+            @else
+            @foreach($items as $item)
+            <div class='item-div-1'>
+                <a href={{route('showproduct',$item->id)}}>
+                <div class='item-div-2'>
+                    <img src="{{'images/'.$item->image}}" alt="item1" />
+                </div>
+                <div class='item-div-3'>
+                    <p>{!!$item->product_name!!}</p>
+                </div>
+                <div class='item-div-4'>
+                    <p>{!!$item->price!!} riel</p>
+                </div>
+                <div class='item-div-5'>
+                    <i class="fa fa-star" aria-hidden="true" class='item-star'></i>
+                    <i class="fa fa-star" aria-hidden="true" class='item-star'></i>
+                    <i class="fa fa-star" aria-hidden="true" class='item-star'></i>
+                    <i class="fa fa-star" aria-hidden="true" class='item-star'></i>
+                    <i class="fa fa-star" aria-hidden="true" class='item-star item-star-highlighted' ></i>
+                </div>
+                </a>
+            </div>
+            @endforeach
+            @endif
+
         </div>
 
 
@@ -140,7 +168,6 @@
                 
             </div>
             
-
             <div class="newitem__div-1">
                 @for($i=0;$i<4;$i++)
                 <div class='item-div-1'>

@@ -29,8 +29,9 @@ class AdminController extends Controller
     public function editproduct($id){
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
            
-            $product = PRODUCT::findOrFail($id);
-            return view('admin.editproduct',compact('product'));
+            $product = PRODUCT::whereId($id)->firstOrFail();
+            return view('admin.editproduct', compact('product'));
+            
             
         }
     }
@@ -91,6 +92,34 @@ class AdminController extends Controller
         }
         
     }
+
+    public function updateproduct($id,Request $request){
+        if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
+        $newImageName=time().'-'.$request->name.'.'.$request->image->extension();
+
+            
+             $request->image->move(public_path('images'),$newImageName);
+        $product = PRODUCT::whereId($id)->firstOrFail();
+        $product->product_name=$request->get('name');
+        $product->product_quantity=$request->get('quantity');
+        $product->image=$newImageName;
+        $product->size=$request->get('size');
+        $product->color=$request->get('color');
+        $product->price=$request->get('price');
+        $product->description=$request->get('description');
+        $product->type_of_product=$request->get('type');
+        if($request->get('status') != null) {
+        $product->status = 0;
+        } else {
+            $product->status = 1;
+            }
+        $product->save();
+        return redirect('allproduct')->with('status', 'The product '.$id.' has been updated!');
+        }
+    }
+
+
+
     public function allproduct(){
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
             $product=PRODUCT::all();
