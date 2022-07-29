@@ -35,6 +35,7 @@ class AdminController extends Controller
             
         }
     }
+  
     public function addproductview(Request $request){
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
            
@@ -93,12 +94,12 @@ class AdminController extends Controller
         
     }
 
-    public function updateproduct($id,Request $request){
+    public function updateproduct($id, Request $request){
         if($role = DB::table('users')->where('email',session()->get('email'))->value('role') === 'admin'){
         $newImageName=time().'-'.$request->name.'.'.$request->image->extension();
-
             
-             $request->image->move(public_path('images'),$newImageName);
+            
+        $request->image->move(public_path('images'),$newImageName);
         $product = PRODUCT::whereId($id)->firstOrFail();
         $product->product_name=$request->get('name');
         $product->product_quantity=$request->get('quantity');
@@ -108,14 +109,17 @@ class AdminController extends Controller
         $product->price=$request->get('price');
         $product->description=$request->get('description');
         $product->type_of_product=$request->get('type');
-        if($request->get('status') != null) {
-        $product->status = 0;
-        } else {
-            $product->status = 1;
-            }
+        
         $product->save();
-        return redirect('allproduct')->with('status', 'The product '.$id.' has been updated!');
+        return redirect(action('App\Http\Controllers\AdminController\AdminController@editproduct',$product->id))->with('status', 'The product '.$id.' has been updated!');
         }
+    }
+
+    public function destroy($id)
+    {
+    $product = Product::whereId($id)->firstOrFail();
+    $product->delete();
+    return redirect('/allproduct')->with('status', 'The ticket '.$id.' has been deleted!');
     }
 
 

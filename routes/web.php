@@ -24,8 +24,9 @@ Route::post('/',[App\Http\Controllers\UserController::class, 'logout'])->name('l
 Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 Route::get('/addproduct',[App\Http\Controllers\AdminController::class, 'addproductview'])->name('addproductview');
 Route::post('/addproduct',[App\Http\Controllers\AdminController::class, 'addproductstore'])->name('addproductstore');
-Route::get('/allproduct/{id?}/edit',[App\Http\Controllers\AdminController::class, 'editproduct'])->name('editproduct');
-Route::post('/allproduct/{id?}/edit',[App\Http\Controllers\AdminController::class, 'updateproduct'])->name('updateproduct');
+Route::get('/allproduct/edit/{id?}',[App\Http\Controllers\AdminController::class, 'editproduct'])->name('editproduct');
+Route::post('/allproduct/edit/{id?}',[App\Http\Controllers\AdminController::class, 'updateproduct'])->name('updateproduct');
+Route::post('/allproduct/{id?}/delete','App\Http\Controllers\AdminController@destroy');
 Route::get('/allproduct',[App\Http\Controllers\AdminController::class, 'allproduct'])->name('allproduct');
 Route::get('/product/{id?}',[App\Http\Controllers\ProductController::class, 'showproduct'])->name('showproduct');
 

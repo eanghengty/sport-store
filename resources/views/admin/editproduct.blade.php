@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('content')
 <div class="container w-100  d-flex justify-content-center" >
-<form class="d-flex flex-column justify-content-center p-3 border border-warning w-75" enctype="multipart/form-data" method="post" action="{{route('addproductstore')}}">
+<form class="d-flex flex-column justify-content-center p-3 border border-warning w-75" enctype="multipart/form-data" method="post" action="{{route('updateproduct')}}">
   @csrf
     <p class="display-4">Edit - Product</p>
   <div class="form-group row ">
@@ -18,7 +18,7 @@
   </div>
   <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text">Upload product image</span>
+    <span class="input-group-text">Upload product image</span>s
   </div>
   <div class="custom-file">
     <input type="file" class="custom-file-input" id="inputGroupFile01" name="image">

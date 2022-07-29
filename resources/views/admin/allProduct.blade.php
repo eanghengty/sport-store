@@ -14,7 +14,18 @@
     </tr>
   </thead>
   <tbody>
-    
+    @if($product->isEmpty())
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><p> there is no product </p></td>
+      <td></td>
+      <td></td>
+      <td></td>
+
+    </tr>
+    @else
     @foreach($product as $p)
     <tr>
       
@@ -25,10 +36,19 @@
       <td>{{$p->product_quantity}}</td>
       <td>{{$p->size}}</td>
       <td>{{$p->price}}</td>
-      <td><a href={{ route('editproduct',$p->id)}}>Edit</a> | <a href="#">Delete</a></td>
+      <td><a href="{!! action('App\Http\Controllers\AdminController@editproduct',$p->id) !!}" class="btn btn-success mb-2">Edit</a> 
+      <form method="post" action="{!! action('App\Http\Controllers\AdminController@destroy', $p->id) !!}" class="pull-left">
+        <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+        <div class="form-group">
+        <div>
+        <button type="submit" class="btn btn-warning">Delete</button>
+        </div>
+        </div>
+        </form>
+      </td>
     </tr>
     @endforeach
-    
+    @endif
   
   </tbody>
 </table>
